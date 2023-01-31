@@ -5,10 +5,33 @@
 <h3>Welcome!</h3>
 <br />
 <p>How often would you like your UI backed up?</p>
-<button>Some control</button>
+<select @bind=@selectedFrequency>Some control
+    @foreach (var freq in frequencys)
+    {
+        <option value=@freq>@freq</option>
+    }
+</select>
 <br />
 <br />
 <p>Where would you like it backed up to?</p>
 <button>Some other control</button>
+<br />
+<br />
+<button @onclick="Save">Save</button>
 @*<SurveyPrompt Title="How is Blazor working for you?" />
 *@
+
+@code {
+    private string selectedFrequency;
+    private List<string> frequencys = new List<string>
+    {
+        "Once per day",
+        "Once per week",
+        "Once per month"
+    };
+
+    private void Save()
+    {
+
+    }
+}
