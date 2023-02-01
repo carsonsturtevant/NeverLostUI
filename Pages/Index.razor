@@ -1,11 +1,11 @@
 ﻿@page "/"
 
-@*<h1>Hello, world!</h1>*@
-
-<h3>Welcome!</h3>
+<span class="oi oi-check" aria-hidden="true"></span>
+<span>Latest backup : @latestBackup</span>
+<br />
 <br />
 <p>How often would you like your UI backed up?</p>
-<select @bind=@selectedFrequency>Some control
+<select @bind=@selectedFrequency>
     @foreach (var freq in frequencys)
     {
         <option value=@freq>@freq</option>
@@ -14,7 +14,12 @@
 <br />
 <br />
 <p>Where would you like it backed up to?</p>
-<button>Some other control</button>
+<select @bind=@selectedLocation>
+    @foreach (var loc in locations)
+    {
+        <option value=@loc>@loc</option>
+    }
+</select>
 <br />
 <br />
 <button @onclick="Save">Save</button>
@@ -29,6 +34,16 @@
         "Once per week",
         "Once per month"
     };
+
+    private string selectedLocation;
+    private List<string> locations = new List<string>
+    {
+        "Local Folder",
+        "Google Drive",
+        "Both"
+    };
+
+    private DateTime latestBackup = DateTime.Now;
 
     private void Save()
     {
